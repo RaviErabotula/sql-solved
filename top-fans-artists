@@ -8,22 +8,14 @@ WITH artist_songs AS (
 ),
 ranked_artists AS (
     SELECT ars.artist_name,
-           COUNT(gsr.rank) AS rank_count
+          DENSE_RANK() OVER (ORDER BY COUNT(gsr.rank) DESC) AS artist_rank
     FROM artist_songs ars
     INNER JOIN global_song_rank gsr ON ars.song_id = gsr.song_id
-    WHERE gsr.rank < 10
+    WHERE gsr.rank < 11
     GROUP BY ars.artist_name
-),
-artist_ranks AS (
-    SELECT artist_name,
-           rank_count,
-           DENSE_RANK() OVER (ORDER BY rank_count DESC) AS artist_rank_count,
-           ROW_NUMBER() OVER (PARTITION BY rank_count ORDER BY rank_count DESC) AS artist_rank
-    FROM ranked_artists
 )
-SELECT artist_name, artist_rank_count
-FROM artist_ranks
-WHERE artist_rank_count < 6
-  AND (artist_rank < 2 OR artist_rank_count <> 5)
-ORDER BY artist_rank_count, artist_rank;
+
+SELECT *      
+FROM ranked_artists where artist_rank<6;
+
 
