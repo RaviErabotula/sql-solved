@@ -1,0 +1,16 @@
+#Q - https://datalemur.com/questions/sql-histogram-tweets
+
+
+
+WITH user_tweets
+AS (
+	SELECT user_id
+		,count(*) AS user_tweets_count
+	FROM tweets
+	WHERE date_part('year', tweet_date) = 2022
+	GROUP BY user_id
+	)
+SELECT user_tweets_count
+	,count(*) AS tweet_bucket
+FROM user_tweets
+GROUP BY user_tweets_count;
