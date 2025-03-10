@@ -1,4 +1,4 @@
-#Q: https://datalemur.com/questions/sql-department-company-salary-comparison
+--Q: https://datalemur.com/questions/sql-department-company-salary-comparison
 
 with department_salary as (
   SELECT 
