@@ -1,4 +1,4 @@
-#Q: https://datalemur.com/questions/top-fans-rank
+--Q: https://datalemur.com/questions/top-fans-rank
 
 
 WITH artist_songs AS (
