@@ -1,4 +1,4 @@
-#Q: https://datalemur.com/questions/sql-top-three-salaries
+--Q: https://datalemur.com/questions/sql-top-three-salaries
 
 
 WITH top_employees
